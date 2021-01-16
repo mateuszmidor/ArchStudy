@@ -7,24 +7,10 @@ How to use PlantULM + C4: <https://github.com/plantuml-stdlib/C4-PlantUML>
 2. open .puml document
 3. ALT + D to render the diagram
 
-## C4 shapes definitions: local stored vs remote stored
+## Generate PNG from .puml
 
-Shapes to PlantUML are like CSS to HTML - they define style; what a system looks like, what a container, a component, a person looks like.  
-C4 has it's own set of shapes that can be used from PlantUML, but the set is not installed by default.  
-You can find predefined shapes at <https://github.com/plantuml-stdlib/C4-PlantUML>  
-In your .puml documents you can reference C4 shapes that are either:
-- locally stored:
-```csharp
-@startuml
-!include shapes/C4_Container.puml
-(...)
-```
-
-- or github stored:
-```csharp
-@startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-(...)
+```bash
+plantuml petclinic_context.puml # will generate: petclinic_context.png
 ```
 
 ## C1 - Context Diagram
@@ -107,7 +93,40 @@ Available layouts:
 - LAYOUT_AS_SKETCH() - squiggling borders
 - HIDE_STEREOTYPE() - hides <<stetreotype>>
 - LAYOUT_WITH_LEGEND() - displays color legend and hides <<stetreotype>>
+
 Example:
 ```csharp
 LAYOUT_WITH_LEGEND()
 ```
+
+
+## C4 shapes definitions: local stored vs remote stored
+
+Shapes to PlantUML are like CSS to HTML - they define style; what a system looks like, what a container, a component, a person looks like.  
+C4 has it's own set of shapes that can be used from PlantUML, but the set is not installed by default.  
+You can find predefined shapes at <https://github.com/plantuml-stdlib/C4-PlantUML>  
+In your .puml documents you can reference C4 shapes that are either:
+- locally stored:
+```csharp
+@startuml
+!include shapes/C4_Container.puml
+(...)
+```
+
+- or github stored:
+```csharp
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+(...)
+```
+
+## Examples (by Simon Brown)
+
+- PetClinic Context  
+![](petclinic_context.png)
+
+- PetClinic Containers  
+![](petclinic_container.png)
+
+- PetClinic Components  
+![](petclinic_component.png)
