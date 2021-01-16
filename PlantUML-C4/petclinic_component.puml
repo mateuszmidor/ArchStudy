@@ -1,0 +1,53 @@
+@startuml
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+ !include shapes/C4_Component.puml
+
+' Based on example from Software Architecture for Developers Vol. 2 by Simon Brown
+
+LAYOUT_WITH_LEGEND()
+
+title Spring PetClinic - Components
+
+Person(ClinicEmployee, "Clinic Employee", "Person")
+
+Container_Boundary(WebApplication, "WebApplication") {
+    Component(VetController, "VetController", "Component: Spring MVC Controller")
+    Component(VisitController, "VisitController", "Component: Spring MVC Controller")
+    Component(PetController, "PetController", "Component: Spring MVC Controller")
+    Component(OwnerController, "OwnerController", "Component: Spring MVC Controller")
+    Component(CrashController, "CrashController", "Component: Spring MVC Controller")
+
+    Component(ClinicService, "ClinicService", "Component: Spring Service", "Mostly used as a facade so all controllers have a single point of entry")
+
+    Component(VetRepositiory, "VetRepositiory", "Component: Spring Repository")
+    Component(VisitRepositiory, "VisitRepositiory", "Component: Spring Repository")
+    Component(PetRepositiory, "PetRepositiory", "Component: Spring Repository")
+    Component(OwnerRepositiory, "OwnerRepositiory", "Component: Spring Repository")
+    Component(CrashRepositiory, "CrashRepositiory", "Component: Spring Repository")
+
+    Rel(VetController, ClinicService, " ")
+    Rel(VisitController, ClinicService, " ")
+    Rel(PetController, ClinicService, " ")
+    Rel(OwnerController, ClinicService, " ")
+    Rel(CrashController, ClinicService, " ")
+
+    Rel(ClinicService, VetRepositiory, " ")
+    Rel(ClinicService, VisitRepositiory, " ")
+    Rel(ClinicService, PetRepositiory, " ")
+    Rel(ClinicService, OwnerRepositiory, " ")
+    Rel(ClinicService, CrashRepositiory, " ")
+}
+Rel(ClinicEmployee, VetController, "Uses", "http")
+Rel(ClinicEmployee, VisitController, "Uses", "http")
+Rel(ClinicEmployee, PetController, "Uses", "http")
+Rel(ClinicEmployee, OwnerController, "Uses", "http")
+Rel(ClinicEmployee, CrashController, "Uses", "http")
+
+ContainerDb(RelationalDatabase, "Relational Database", "Container: HSQLDB")
+
+Rel(VetRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(VisitRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(PetRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(OwnerRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(CrashRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+@enduml

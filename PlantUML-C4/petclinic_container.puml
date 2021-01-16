@@ -1,0 +1,19 @@
+@startuml
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+ !include shapes/C4_Container.puml
+
+' Based on example from Software Architecture for Developers Vol. 2 by Simon Brown
+
+LAYOUT_WITH_LEGEND()
+
+title Spring PetClinic - Containers
+
+Person(ClinicEmployee, "Clinic Employee", "Person")
+System_Boundary(SpringPetClinic, "SpringPetClinic") {
+    Container(WebApplication, "Web Application", "Container: Apache TomCat 7.x")
+    ContainerDb(RelationalDatabase, "Relational Database", "Container: HSQLDB")
+}
+
+Rel_Neighbor(ClinicEmployee, SpringPetClinic, "Uses", "http")
+Rel(WebApplication, RelationalDatabase, "Reads/Writes", "jdbc, port 9000")
+@enduml
