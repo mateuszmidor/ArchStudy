@@ -122,11 +122,96 @@ In your .puml documents you can reference C4 shapes that are either:
 
 ## Examples (by Simon Brown)
 
-- PetClinic Context  
-![](petclinic_context.png)
+- PetClinic Context
+```csharp
+@startuml
+!include shapes/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Spring PetClinic - System Context
+
+Person(ClinicEmployee, "Clinic Employee", "Person")
+System(SpringPetClinic, "Spring PetClinic", "Software System")
+
+
+Rel(ClinicEmployee, SpringPetClinic, "Uses")
+@enduml
+```
+![](media/petclinic_context.png)
 
 - PetClinic Containers  
-![](petclinic_container.png)
+```csharp
+@startuml
+!include shapes/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Spring PetClinic - Containers
+
+Person(ClinicEmployee, "Clinic Employee", "Person")
+System_Boundary(SpringPetClinic, "SpringPetClinic") {
+    Container(WebApplication, "Web Application", "Container: Apache TomCat 7.x")
+    ContainerDb(RelationalDatabase, "Relational Database", "Container: HSQLDB")
+}
+
+Rel_Neighbor(ClinicEmployee, SpringPetClinic, "Uses", "http")
+Rel(WebApplication, RelationalDatabase, "Reads/Writes", "jdbc, port 9000")
+@enduml
+```
+![](./media/petclinic_container.png)
 
 - PetClinic Components  
-![](petclinic_component.png)
+```csharp
+@startuml
+!include shapes/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Spring PetClinic - Components
+
+Person(ClinicEmployee, "Clinic Employee", "Person")
+
+Container_Boundary(WebApplication, "WebApplication") {
+    Component(VetController, "VetController", "Component: Spring MVC Controller")
+    Component(VisitController, "VisitController", "Component: Spring MVC Controller")
+    Component(PetController, "PetController", "Component: Spring MVC Controller")
+    Component(OwnerController, "OwnerController", "Component: Spring MVC Controller")
+    Component(CrashController, "CrashController", "Component: Spring MVC Controller")
+
+    Component(ClinicService, "ClinicService", "Component: Spring Service", "Mostly used as a facade so all controllers have a single point of entry")
+
+    Component(VetRepositiory, "VetRepositiory", "Component: Spring Repository")
+    Component(VisitRepositiory, "VisitRepositiory", "Component: Spring Repository")
+    Component(PetRepositiory, "PetRepositiory", "Component: Spring Repository")
+    Component(OwnerRepositiory, "OwnerRepositiory", "Component: Spring Repository")
+    Component(CrashRepositiory, "CrashRepositiory", "Component: Spring Repository")
+
+    Rel(VetController, ClinicService, " ")
+    Rel(VisitController, ClinicService, " ")
+    Rel(PetController, ClinicService, " ")
+    Rel(OwnerController, ClinicService, " ")
+    Rel(CrashController, ClinicService, " ")
+
+    Rel(ClinicService, VetRepositiory, " ")
+    Rel(ClinicService, VisitRepositiory, " ")
+    Rel(ClinicService, PetRepositiory, " ")
+    Rel(ClinicService, OwnerRepositiory, " ")
+    Rel(ClinicService, CrashRepositiory, " ")
+}
+Rel(ClinicEmployee, VetController, "Uses", "http")
+Rel(ClinicEmployee, VisitController, "Uses", "http")
+Rel(ClinicEmployee, PetController, "Uses", "http")
+Rel(ClinicEmployee, OwnerController, "Uses", "http")
+Rel(ClinicEmployee, CrashController, "Uses", "http")
+
+ContainerDb(RelationalDatabase, "Relational Database", "Container: HSQLDB")
+
+Rel(VetRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(VisitRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(PetRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(OwnerRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+Rel(CrashRepositiory, RelationalDatabase, "Reads/Writes", "jdbc")
+@enduml
+```
+![](./media/petclinic_component.png)
