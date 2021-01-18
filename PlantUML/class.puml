@@ -1,11 +1,55 @@
 @startuml class
 
-skinparam monochrome true
+title Device and it's innards
 
-Object <|-- ArrayList
+package "public" {
+    enum AuthProtocol {
+        none
+        md5
+        sha
+    }
 
-Object : equals()
-ArrayList : Object[] elementData
-ArrayList : size()
+    enum PrivProtocol {
+        none
+        des
+        aes
+    }
+
+    class SNMPv3Conf {
+        +user_name: str
+        +auth_pass: str 
+        +priv_pass: str
+        +with_auth(...)
+        +with_priv(...)
+    }
+    AuthProtocol --* SNMPv3Conf
+    PrivProtocol --* SNMPv3Conf
+
+    class DeviceLabel {
+        +id: int
+        +name: str
+        +color: str
+    }
+
+    class Site {
+        +site_name: str
+        +longitude: float
+        +latitude: float
+    }
+
+    class Device #pink {
+        +id: int
+        +device_type: DeviceType
+        +device_subtype: DeviceSubtype
+        +...
+        +new_dns(...)
+        +new_router(...)
+    }
+    note right: new_dns(...) and new_router(...) \nare convenient constructors
+
+    SNMPv3Conf --o Device
+    DeviceLabel --o Device
+    Site --o Device
+}
 
 @enduml

@@ -125,7 +125,7 @@ stop
 Describing a Use Case <https://seilevel.com/business-analyst-resources/business-requirements-models-templates/use-cases/>
 
 ```csharp
-@startuml usecase
+@startuml usecasehttps://plantuml.com/use-case-diagram
 
 title Resource operations use cases
 
@@ -182,3 +182,64 @@ package api_resources{
 @enduml
 ```
 ![](media/usecase.png)
+
+- Class diagram <https://plantuml.com/class-diagram>
+
+```csharp
+@startuml class
+
+title Device and it's innards
+
+package "public" {
+    enum AuthProtocol {
+        none
+        md5
+        sha
+    }
+
+    enum PrivProtocol {
+        none
+        des
+        aes
+    }
+
+    class SNMPv3Conf {
+        +user_name: str
+        +auth_pass: str 
+        +priv_pass: str
+        +with_auth(...)
+        +with_priv(...)
+    }
+    AuthProtocol --* SNMPv3Conf
+    PrivProtocol --* SNMPv3Conf
+
+    class DeviceLabel {
+        +id: int
+        +name: str
+        +color: str
+    }
+
+    class Site {
+        +site_name: str
+        +longitude: float
+        +latitude: float
+    }
+
+    class Device #pink {
+        +id: int
+        +device_type: DeviceType
+        +device_subtype: DeviceSubtype
+        +...
+        +new_dns(...)
+        +new_router(...)
+    }
+    note right: new_dns(...) and new_router(...) \nare convenient constructors
+
+    SNMPv3Conf --o Device
+    DeviceLabel --o Device
+    Site --o Device
+}
+
+@enduml
+```
+![](media/class.png)
