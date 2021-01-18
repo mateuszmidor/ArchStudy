@@ -120,3 +120,65 @@ stop
 @enduml
 ```
 ![](media/activity.png)
+
+- UseCase diagram <https://plantuml.com/use-case-diagram>  
+Describing a Use Case <https://seilevel.com/business-analyst-resources/business-requirements-models-templates/use-cases/>
+
+```csharp
+@startuml usecase
+
+title Resource operations use cases
+
+left to right direction
+' top to bottom direction
+'
+skinparam actorStyle awesome
+
+actor "User" as user
+actor "Admin" as admin
+admin -|> user: extends privileges
+
+package api_resources{
+    rectangle DevicesAPI <<class>>{
+        usecase "Create device" as create_device #lightgreen
+        usecase "Update device" as update_device #orange
+        usecase "Delete device" as delete_device #red
+        usecase "Get device" as get_device #blue
+        usecase "List devices" as list_devices #lightblue
+    }
+    admin --> create_device
+    admin --> update_device
+    admin --> delete_device
+    user --> get_device
+    user --> list_devices
+
+    rectangle QueryAPI <<class>> {
+        usecase query_data as "**Query for Data**
+        --
+        ID: 1
+        "
+        
+        usecase query_chart as "**Query for chart**
+        --
+        ID: 2
+        --
+        Main course:
+        1. Prepare QueryObject
+        2. Call chart(QueryObject)
+        3. Wait for result
+        4. Store returned chart
+        --
+        Exceptions:
+        EX1: TooManyRequestsError
+        EX2: IncompleteObjectError
+        EX3: DeserializationError
+        EX4: DataFormatError
+        " 
+    }
+    user --> query_data
+    user --> query_chart: long operation\non API side\n (up to 5 sec)
+    note bottom of QueryAPI: subject to soft and hard limits on API side,\ncan lead to 429: Too many request 
+}
+@enduml
+```
+![](media/usecase.png)
