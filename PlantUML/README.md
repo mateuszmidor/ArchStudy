@@ -243,3 +243,52 @@ package "public" {
 @enduml
 ```
 ![](media/class.png)
+
+- Mindmap <https://plantuml.com/mindmap-diagram>
+
+```csharp
+@startmindmap mindmap
+
+title Resource and operations tree
+
+<style>
+mindmapDiagram {
+  .green {
+    BackgroundColor lightgreen
+  }
+  .red {
+    BackgroundColor red
+  }
+  .orange {
+    BackgroundColor orange
+  }
+  .blue {
+    BackgroundColor lightblue
+  }
+  .violet {
+    BackgroundColor violet
+  }
+}
+</style>
+
+
+*[#Yellow] api_client
+ * devices_api
+  * create() <<blue>>
+  * get() <<green>>
+  * update() <<orange>>
+  * delete() <<red>>
+
+' left side '
+
+ * query_api
+  * url <<violet>>
+   *_ url
+  * data() <<violet>>
+   *_ rows
+  * chart() <<violet>>
+   *_ image_type
+   *_ image_data
+@endmindmap
+```
+![](media/mindmap.png)
