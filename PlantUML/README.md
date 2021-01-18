@@ -4,8 +4,7 @@ PlantUML in a nutshell <https://plantuml.com>
 
 ## Examples
 
-- Sequence diagram 
-<https://plantuml.com/sequence-diagram>
+- Sequence diagram <https://plantuml.com/sequence-diagram>
 ```csharp
 @startuml sequence
 
@@ -40,3 +39,46 @@ deactivate
 @enduml
 ```
 ![](media/sequence.png)
+
+- Component diagram <https://plantuml.com/component-diagram>
+
+```csharp
+@startuml component
+
+title Components 
+
+package "api_connection" {
+    interface APIConnectorProtocol #red 
+    note right: abstracts connection towards http api
+    [APIConnector] - APIConnectorProtocol: provide
+}
+
+package "tests" {
+    component StubAPIConnector
+    note right: allows to test eg. DevicesAPI without spinning actual http server
+    [StubAPIConnector] -- APIConnectorProtocol: provide
+}
+package "api_resources" {
+    APIConnectorProtocol )..# [DevicesAPI]: require
+    APIConnectorProtocol )..# [UsersAPI]: require
+    APIConnectorProtocol )..# [PlansAPI]: require
+}
+
+package "public" {
+    [Device]
+}
+
+package "requests_payloads" {
+    [CreateRequest]
+}
+
+package "api_calls" {
+    [create_device]
+}
+[DevicesAPI] --> [create_device]: use
+[DevicesAPI] --> [Device]: use
+[DevicesAPI] --> [CreateRequest]: use
+[CreateRequest] -> [Device]: use
+@enduml
+```
+![](media/component.png)
