@@ -1,4 +1,6 @@
-@startuml Component example
+@startuml component
+
+skinparam monochrome true
 
 package "Some Group" {
   HTTP - [First Component]

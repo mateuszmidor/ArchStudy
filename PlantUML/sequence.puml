@@ -1,17 +1,30 @@
-@startuml Sequence example
-participant participant as Foo
-actor       actor       as Foo1
-boundary    boundary    as Foo2
-control     control     as Foo3
-entity      entity      as Foo4
-database    database    as Foo5
-collections collections as Foo6
-queue       queue       as Foo7
-Foo -> Foo1 : To actor 
-Foo -> Foo2 : To boundary
-Foo -> Foo3 : To control
-Foo -> Foo4 : To entity
-Foo -> Foo5 : To database
-Foo -> Foo6 : To collections
-Foo -> Foo7: To queue
+@startuml sequence
+
+title Device creation
+hide footbox
+' skinparam handwritten true
+' skinparam monochrome true
+' actor, participant, database, collections, queue
+actor User as user 
+
+
+user -> api_client: devices.create(device) 
+note right: device is created using factory method:\n **Device.new_router(...)**
+activate api_client
+    alt NO EXCEPTION
+        api_client -> devices_payload: payload = CreateRequest.from_device(device)
+        activate devices_payload #red
+            devices_payload -> devices_payload: validate(device)
+        return
+        api_client -> api_calls: api_call = create_device()
+        api_client -> api_connector: response = send(api_call, payload)
+        api_client -> devices_payload: result = CreateResponse.from_json(response.text).to_device()
+        activate devices_payload #red
+            devices_payload -> devices_payload: validate(json)
+        return
+        user <-- api_client: result
+    else HTTP/VALIDATION/DESERIALIZATION EXCEPTION
+        user <-- api_client: exception
+    end
+deactivate
 @enduml

@@ -1,4 +1,7 @@
-@startuml Class example
+@startuml class
+
+skinparam monochrome true
+
 Object <|-- ArrayList
 
 Object : equals()

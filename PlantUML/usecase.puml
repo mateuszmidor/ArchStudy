@@ -1,4 +1,4 @@
-@startuml Usecase example
+@startuml usecase
 left to right direction
 actor "Food Critic" as fc
 rectangle Restaurant {

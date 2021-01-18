@@ -1,4 +1,4 @@
-@startmindmap Mindmap example
+@startmindmap mindmap
 <style>
 mindmapDiagram {
   .green {
@@ -12,6 +12,7 @@ mindmapDiagram {
   }
 }
 </style>
+
 * root node
  * some first level node <<green>>
   * second level node <<rose>>

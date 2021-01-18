@@ -1,4 +1,6 @@
-@startuml Activity example
+@startuml activity
+
+skinparam monochrome true
 
 start
 :ClickServlet.handleRequest();
