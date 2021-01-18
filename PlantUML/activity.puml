@@ -1,38 +1,27 @@
 @startuml activity
 
-skinparam monochrome true
+title Bulk user create from .yaml
+!pragma useVerticalIf off
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
+    :users = load users from .yaml file;
+    if (load successful?) then (no)
+        :print failure;
+        stop
+    else (yes)
     endif
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
-    endif
-    :Page.onRender();
-  endif
-else (false)
-endif
-
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
-
+    partition "Create Users" {
+        while (has more users?) is (yes)
+            :pop user dict from users;
+            :deserialize User from user dict;
+            if (deserialization successful?) then (yes)
+                #lightgreen:http request user create;
+            else (no)
+                #red:log error;
+            endif
+        endwhile (no)
+    }
+    :print num users created;
 stop
-
 @enduml

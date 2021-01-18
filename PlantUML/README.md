@@ -2,6 +2,11 @@
 
 PlantUML in a nutshell <https://plantuml.com>
 
+## Customize the look
+
+- `skinparam handwritten true` - squiggling borders
+- `skinparam monochrome true` - black&white
+
 ## Examples
 
 - Sequence diagram <https://plantuml.com/sequence-diagram>
@@ -82,3 +87,36 @@ package "api_calls" {
 @enduml
 ```
 ![](media/component.png)
+
+-  Activity diagram <https://plantuml.com/activity-diagram-beta>
+
+```csharp
+@startuml activity
+
+title Bulk user create from .yaml
+!pragma useVerticalIf off
+
+start
+    :users = load users from .yaml file;
+    if (load successful?) then (no)
+        :print failure;
+        stop
+    else (yes)
+    endif
+
+    partition "Create Users" {
+        while (has more users?) is (yes)
+            :pop user dict from users;
+            :deserialize User from user dict;
+            if (deserialization successful?) then (yes)
+                #lightgreen:http request user create;
+            else (no)
+                #red:log error;
+            endif
+        endwhile (no)
+    }
+    :print num users created;
+stop
+@enduml
+```
+![](media/activity.png)

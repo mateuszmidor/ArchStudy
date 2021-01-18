@@ -2,8 +2,6 @@
 
 title Device creation
 hide footbox
-' skinparam handwritten true
-' skinparam monochrome true
 ' actor, participant, database, collections, queue
 actor User as user 
 
