@@ -6,6 +6,8 @@ PlantUML in a nutshell <https://plantuml.com>
 
 - `skinparam handwritten true` - squiggling borders
 - `skinparam monochrome true` - black&white
+- `skinparam monochrome reverse` - dark theme
+- `skinparam roundcorner 20` - Apple patented look :)
 
 ## Examples
 
