@@ -1,5 +1,11 @@
 # Architectural Drivers. Simon Brown & DNA
 
+## Project goal
+
+- one-shot application that will never be maintained (eg. black friday sales)
+- starting point for others to develop in whatever direction they need
+- flag product that needs quality and maintainability
+
 ## Functional requirements
 
 - what the system can do for you
