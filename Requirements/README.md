@@ -16,7 +16,7 @@
 1. Extensions
 1. Technology & Data Variations List
 
-See example: <https://en.wikipedia.org/wiki/Use_case> #Examples
+See example: <https://en.wikipedia.org/wiki/Use_case#Examples> 
 
 ## Code Complete 2.0
 
