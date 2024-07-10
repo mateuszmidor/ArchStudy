@@ -3,32 +3,32 @@
 
 // Service map (from PID perspective)
 ContextMap ACME {
-	contains Dashboard
-	contains Devices
-	contains UserAuthorization
-	contains UserManagement
-	contains Samples
-	contains Metrics
-	
-	
-	UserAuthorization [P]<->[P] UserManagement { // UserAuthorization talks to UserManagement to check User data, UserManagement only accepts requests authorized by UserAuthorization, thus have Partnership relationship
-		implementationTechnology = "gRPC"
-	}
-	Devices [D,CF]<-[U] UserManagement { // Devices talks to UserManagement, and uses the Upstream model as-is (aka Conformist)
-		implementationTechnology = "gRPC"
-	}
-	Metrics [D,ACL]<-[U,OHS] Samples { // Metrics talks to Samples that exposes API as Open Host Service, and translates Samples model to it's own internal model (aka Anti Corruption Layer)
-		implementationTechnology = "gRPC"
-	}
-	Dashboard [D]<-[U] Metrics { // Dashboard talks to Metrics
-		implementationTechnology = "connect-go"
-	}
-	Dashboard [D,C]<-[U,S] UserAuthorization { // Dashboard talks to UserAuthorization in Customer-Supplier fashion - signup, login, refresh, ...
-		implementationTechnology = "connect-go"
-	}
-	Dashboard [D]<-[U] UserManagement { // Dashboard talks to UserManagement in Downsteam-Upsteam fashion - CRUD for users, permissions, roles, ...
-		implementationTechnology = "connect-go"
-	}
+    contains Dashboard
+    contains Devices
+    contains UserAuthorization
+    contains UserManagement
+    contains Samples
+    contains Metrics
+    
+    
+    UserAuthorization [P]<->[P] UserManagement { // UserAuthorization talks to UserManagement to check User data, UserManagement only accepts requests authorized by UserAuthorization, thus have Partnership relationship
+        implementationTechnology = "gRPC"
+    }
+    Devices [D,CF]<-[U] UserManagement { // Devices talks to UserManagement, and uses the Upstream model as-is (aka Conformist)
+        implementationTechnology = "gRPC"
+    }
+    Metrics [D,ACL]<-[U,OHS] Samples { // Metrics talks to Samples that exposes API as Open Host Service, and translates Samples model to it's own internal model (aka Anti Corruption Layer)
+        implementationTechnology = "gRPC"
+    }
+    Dashboard [D]<-[U] Metrics { // Dashboard talks to Metrics
+        implementationTechnology = "connect-go"
+    }
+    Dashboard [D,C]<-[U,S] UserAuthorization { // Dashboard talks to UserAuthorization in Customer-Supplier fashion - signup, login, refresh, ...
+        implementationTechnology = "connect-go"
+    }
+    Dashboard [D]<-[U] UserManagement { // Dashboard talks to UserManagement in Downsteam-Upsteam fashion - CRUD for users, permissions, roles, ...
+        implementationTechnology = "connect-go"
+    }
 }
 
 BoundedContext UserAuthorization implements UserAuthorizationAuthenticationSubdomain{
