@@ -1,0 +1,33 @@
+digraph "ContextMapGraph" {
+graph ["imagepath"="/var/folders/j0/w0dgb2354nd6cbjsr0w1jm540000gn/T/GraphvizJava"]
+"CircleTeam" ["margin"="0.3","orientation"="77","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>CircleTeam</td></tr></table>>,"fontname"="sans-serif"]
+"Dashboard" ["margin"="0.3","orientation"="292","shape"="egg","fontsize"="16","style"="bold","label"="Dashboard\n","fontname"="sans-serif"]
+"RectangleTeam" ["margin"="0.3","orientation"="192","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>RectangleTeam</td></tr></table>>,"fontname"="sans-serif"]
+"UserManagement" ["margin"="0.3","orientation"="61","shape"="egg","fontsize"="16","style"="bold","label"="UserManagement\n","fontname"="sans-serif"]
+"UserAuthorization" ["margin"="0.3","orientation"="45","shape"="egg","fontsize"="16","style"="bold","label"="UserAuthorization\n","fontname"="sans-serif"]
+"TriangleTeam" ["margin"="0.3","orientation"="310","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>TriangleTeam</td></tr></table>>,"fontname"="sans-serif"]
+"Devices" ["margin"="0.3","orientation"="292","shape"="egg","fontsize"="16","style"="bold","label"="Devices\n","fontname"="sans-serif"]
+"Samples" ["margin"="0.3","orientation"="312","shape"="egg","fontsize"="16","style"="bold","label"="Samples\n","fontname"="sans-serif"]
+"Metrics" ["margin"="0.3","orientation"="127","shape"="egg","fontsize"="16","style"="bold","label"="Metrics\n","fontname"="sans-serif"]
+subgraph "cluster_GenericSubgraph" {
+graph ["imagepath"="/var/folders/j0/w0dgb2354nd6cbjsr0w1jm540000gn/T/GraphvizJava","color"="white"]
+"Dashboard" ["margin"="0.3","orientation"="134","shape"="egg","fontsize"="16","style"="bold","label"="Dashboard\n","fontname"="sans-serif"]
+"UserManagement" ["margin"="0.3","orientation"="121","shape"="egg","fontsize"="16","style"="bold","label"="UserManagement\n","fontname"="sans-serif"]
+"Metrics" ["margin"="0.3","orientation"="207","shape"="egg","fontsize"="16","style"="bold","label"="Metrics\n","fontname"="sans-serif"]
+"Samples" ["margin"="0.3","orientation"="191","shape"="egg","fontsize"="16","style"="bold","label"="Samples\n","fontname"="sans-serif"]
+"Devices" ["margin"="0.3","orientation"="207","shape"="egg","fontsize"="16","style"="bold","label"="Devices\n","fontname"="sans-serif"]
+"UserAuthorization" ["margin"="0.3","orientation"="71","shape"="egg","fontsize"="16","style"="bold","label"="UserAuthorization\n","fontname"="sans-serif"]
+}
+subgraph "cluster_Teams_Subgraph" {
+graph ["imagepath"="/var/folders/j0/w0dgb2354nd6cbjsr0w1jm540000gn/T/GraphvizJava","color"="white"]
+"TriangleTeam" ["margin"="0.3","orientation"="333","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>TriangleTeam</td></tr></table>>,"fontname"="sans-serif"]
+"CircleTeam" ["margin"="0.3","orientation"="212","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>CircleTeam</td></tr></table>>,"fontname"="sans-serif"]
+"RectangleTeam" ["margin"="0.3","orientation"="86","shape"="egg","fontsize"="16","style"="bold","label"=<<table cellspacing="0" cellborder="0" border="0"><tr><td rowspan="2"><img src='team-icon.png' /></td><td width="10px"></td><td><b>Team</b></td></tr><tr><td width="10px"></td><td>RectangleTeam</td></tr></table>>,"fontname"="sans-serif"]
+}
+"CircleTeam" -> "Dashboard" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+"RectangleTeam" -> "UserAuthorization" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+"RectangleTeam" -> "UserManagement" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+"TriangleTeam" -> "Metrics" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+"TriangleTeam" -> "Samples" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+"TriangleTeam" -> "Devices" ["fontsize"="12","fontcolor"="#686868","style"="dashed","label"="  «realizes»\n","color"="#686868","fontname"="sans-serif"]
+}

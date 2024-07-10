@@ -1,0 +1,87 @@
+// Tool: https://contextmapper.org
+// VS Code plugin: "Context Mapper", command to generate images: "Generate Graphical Context Map"
+
+// Service map (from PID perspective)
+ContextMap ACME {
+	contains Dashboard
+	contains Devices
+	contains UserAuthorization
+	contains UserManagement
+	contains Samples
+	contains Metrics
+	
+	
+	UserAuthorization [P]<->[P] UserManagement { // UserAuthorization talks to UserManagement to check User data, UserManagement only accepts requests authorized by UserAuthorization, thus have Partnership relationship
+		implementationTechnology = "gRPC"
+	}
+	Devices [D,CF]<-[U] UserManagement { // Devices talks to UserManagement, and uses the Upstream model as-is (aka Conformist)
+		implementationTechnology = "gRPC"
+	}
+	Metrics [D,ACL]<-[U,OHS] Samples { // Metrics talks to Samples that exposes API as Open Host Service, and translates Samples model to it's own internal model (aka Anti Corruption Layer)
+		implementationTechnology = "gRPC"
+	}
+	Dashboard [D]<-[U] Metrics { // Dashboard talks to Metrics
+		implementationTechnology = "connect-go"
+	}
+	Dashboard [D,C]<-[U,S] UserAuthorization { // Dashboard talks to UserAuthorization in Customer-Supplier fashion - signup, login, refresh, ...
+		implementationTechnology = "connect-go"
+	}
+	Dashboard [D]<-[U] UserManagement { // Dashboard talks to UserManagement in Downsteam-Upsteam fashion - CRUD for users, permissions, roles, ...
+		implementationTechnology = "connect-go"
+	}
+}
+
+BoundedContext UserAuthorization implements UserAuthorizationAuthenticationSubdomain{
+    type APPLICATION
+    implementationTechnology "Go"
+    responsibilities "authorization", "authentication"
+}
+BoundedContext UserManagement implements UserAuthorizationAuthenticationSubdomain{
+    type APPLICATION
+    implementationTechnology "Go"
+    responsibilities "user/permission/role management"
+    Module Users
+    Module Permissions
+    Module Roles
+}
+BoundedContext Dashboard{
+    type APPLICATION
+    implementationTechnology "TypeScript"
+    responsibilities "system configuration"
+}
+BoundedContext Devices implements TrustedDevicesSubdomain{
+    type APPLICATION
+}
+BoundedContext Samples implements DataCollectionSubdomain{
+    type APPLICATION
+}
+BoundedContext Metrics implements DataCollectionSubdomain{
+    type APPLICATION
+}
+
+Domain ConfidentialDataLeakagePrevention {
+    Subdomain DataCollectionSubdomain {
+        type CORE_DOMAIN
+        domainVisionStatement "collect all data from the environment"
+    }
+    Subdomain TrustedDevicesSubdomain {
+        type SUPPORTING_DOMAIN
+        domainVisionStatement "make sure user is connecting from a known, secure device"
+    }
+    Subdomain UserAuthorizationAuthenticationSubdomain supports UserSignIn, AssignPermission {
+        type GENERIC_SUBDOMAIN
+        domainVisionStatement "allow users to sign up, sign in, assign permissions and roles"
+    }
+} 
+
+UserStory UserSignIn {
+    As an "User"
+        I want to "sign_into" the "system"
+    so that "I am able to access company's resources"
+}
+
+UserStory AssignPermission {
+    As an "Admin"
+        I want to "assign" "permission" to "user"
+    so that "The user can access resources they need"
+}

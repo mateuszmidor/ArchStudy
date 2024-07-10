@@ -1,0 +1,35 @@
+digraph "ContextMapGraph" {
+graph ["imagepath"="/var/folders/j0/w0dgb2354nd6cbjsr0w1jm540000gn/T/GraphvizJava"]
+"Dashboard" ["margin"="0.3","orientation"="108","shape"="egg","fontsize"="16","style"="bold","label"="Dashboard\n","fontname"="sans-serif"]
+"Devices" ["margin"="0.3","orientation"="258","shape"="egg","fontsize"="16","style"="bold","label"="Devices\n","fontname"="sans-serif"]
+"Metrics" ["margin"="0.3","orientation"="16","shape"="egg","fontsize"="16","style"="bold","label"="Metrics\n","fontname"="sans-serif"]
+"Samples" ["margin"="0.3","orientation"="206","shape"="egg","fontsize"="16","style"="bold","label"="Samples\n","fontname"="sans-serif"]
+"UserAuthorization" ["margin"="0.3","orientation"="18","shape"="egg","fontsize"="16","style"="bold","label"="UserAuthorization\n","fontname"="sans-serif"]
+"UserManagement" ["margin"="0.3","orientation"="156","shape"="egg","fontsize"="16","style"="bold","label"="UserManagement\n","fontname"="sans-serif"]
+"Metrics" -> "Dashboard" ["headlabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">D</td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="connect-go","dir"="none","fontname"="sans-serif"]
+"Samples" -> "Metrics" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS</font></td></tr>
+</table>>,"style"="bold","label"="gRPC","dir"="none","fontname"="sans-serif"]
+"UserAuthorization" -> "Dashboard" ["headlabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">D</td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="Customer/Supplier (connect-go)","dir"="none","fontname"="sans-serif"]
+"UserAuthorization" -> "UserManagement" ["fontsize"="12","style"="bold","label"="Partnership (gRPC)","dir"="none","fontname"="sans-serif"]
+"UserManagement" -> "Devices" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>CF</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="gRPC","dir"="none","fontname"="sans-serif"]
+"UserManagement" -> "Dashboard" ["headlabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">D</td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="connect-go","dir"="none","fontname"="sans-serif"]
+}

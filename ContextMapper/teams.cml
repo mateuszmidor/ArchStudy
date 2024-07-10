@@ -1,0 +1,22 @@
+// Tool: https://contextmapper.org
+// VS Code plugin: "Context Mapper", command to generate images: "Generate Graphical Context Map"
+
+import "services.cml" // import bounded contexts
+
+// Teams map - who maintains what service
+ContextMap TeamsMap {
+	type  ORGANIZATIONAL
+	state  AS_IS
+	
+    contains RectangleTeam, TriangleTeam, CircleTeam
+	contains UserAuthorization, UserManagement, Devices, Samples, Metrics, Dashboard
+}
+BoundedContext RectangleTeam realizes UserManagement, UserAuthorization {
+    type TEAM
+}
+BoundedContext CircleTeam realizes Dashboard {
+    type TEAM
+}
+BoundedContext TriangleTeam realizes Devices, Samples, Metrics {
+    type TEAM
+}
