@@ -9,7 +9,6 @@ ContextMap TeamsMap {
     state  AS_IS
 
     contains RectangleTeam, TriangleTeam, CircleTeam
-    contains UserAuthorization, UserManagement, Devices, Samples, Metrics, Dashboard
 }
 BoundedContext RectangleTeam realizes UserManagement, UserAuthorization {
     type TEAM
