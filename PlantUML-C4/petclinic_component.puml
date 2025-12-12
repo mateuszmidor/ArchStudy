@@ -2,7 +2,7 @@
 ' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
  !include shapes/C4_Component.puml
 
-' Based on example from Software Architecture for Developers Vol. 2 by Simon Brown
+' Based on example from Software Architecture for Developers Vol. 2 by Simon Brown.
 
 LAYOUT_WITH_LEGEND()
 
